@@ -5,6 +5,12 @@ import java.util.List;
 
 public class CustomerServiceImpl implements CustomerService {
 
+	private CustomerRepository repository;
+	
+	public CustomerServiceImpl(CustomerRepository repository) {
+		this.repository = repository;
+	}
+	
 	@Override
 	public Customer getCustomer(long id) {
 		Customer customer = new Customer();

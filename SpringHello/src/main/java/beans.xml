@@ -4,8 +4,12 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 	<bean id="hello" class="springHello.Hello" />
-	<bean id="customerService" class="springHello.customer.CustomerServiceImpl"  scope="prototype"
-	   init-method="init"
-	   destroy-method="cleanUp" />
-	
+	<bean id="customerService"
+		class="springHello.customer.CustomerServiceImpl" scope="prototype"
+		init-method="init" destroy-method="cleanUp">
+		<constructor-arg ref="customerRepository" />
+	</bean>
+	<bean id="customerRepository"
+		class="springHello.customer.CustomerRepositoryImpl" />
+
 </beans>
