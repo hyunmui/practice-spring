@@ -7,7 +7,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	private CustomerRepository repository;
 	
-	public CustomerServiceImpl(CustomerRepository repository) {
+	public void setCustomerRepository(CustomerRepository repository) {
 		this.repository = repository;
 	}
 	

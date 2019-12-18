@@ -7,7 +7,7 @@
 	<bean id="customerService"
 		class="springHello.customer.CustomerServiceImpl" scope="prototype"
 		init-method="init" destroy-method="cleanUp">
-		<constructor-arg ref="customerRepository" />
+		<property name="customerRepository" ref="customerRepository" />
 	</bean>
 	<bean id="customerRepository"
 		class="springHello.customer.CustomerRepositoryImpl" />
