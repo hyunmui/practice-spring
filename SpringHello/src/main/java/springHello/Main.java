@@ -6,6 +6,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import springHello.autowire.Bean1;
+import springHello.autowire.Bean2;
+import springHello.autowire.Bean3;
 import springHello.customer.Customer;
 import springHello.customer.CustomerService;
 
@@ -24,6 +27,16 @@ public class Main {
 		// with annotation
 		ApplicationContext annotationCtx = new AnnotationConfigApplicationContext(AppConfig.class);
 		testSpringHello(annotationCtx, beanName);
+		
+		// autowired test
+		ApplicationContext ctx2 = new ClassPathXmlApplicationContext("autowire-bean.xml");
+		Bean1 bean1 = (Bean1)ctx2.getBean("bean1");
+		Bean2 bean2 = (Bean2)ctx2.getBean("bean2");
+		Bean3 bean3 = (Bean3)ctx2.getBean("bean3");
+		
+		System.out.println(bean1);
+		System.out.println(bean2);
+		System.out.println(bean3);
 	}
 	
 	private static void testSpringHello(ApplicationContext ctx, String beanName) {
