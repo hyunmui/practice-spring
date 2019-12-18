@@ -18,9 +18,16 @@ public class Main {
 		String message = hello.sayHello("hyunmui");
 		System.out.println(message);
 		
+		String beanName = "customerService";
+		testSpringHello(ctx, beanName);
+		
 		// with annotation
 		ApplicationContext annotationCtx = new AnnotationConfigApplicationContext(AppConfig.class);
-		CustomerService customerService = (CustomerService)annotationCtx.getBean("customerService");
+		testSpringHello(annotationCtx, beanName);
+	}
+	
+	private static void testSpringHello(ApplicationContext ctx, String beanName) {
+		CustomerService customerService = (CustomerService)ctx.getBean(beanName);
 		
 		List<Customer> customers = customerService.getCustomers();
 		for (Customer customer : customers) {

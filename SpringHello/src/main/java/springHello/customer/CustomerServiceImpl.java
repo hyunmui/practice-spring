@@ -57,5 +57,13 @@ public class CustomerServiceImpl implements CustomerService {
 		Customer customer = getCustomer(id);
 		System.out.println(customer + " was deleted.");
 	}
+	
+	public void init() {
+		System.out.println("Create instance...");
+	}
+	
+	public void cleanUp() {
+		System.out.println("Destroy instance...");
+	}
 
 }
