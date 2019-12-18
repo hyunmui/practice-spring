@@ -2,30 +2,23 @@ package springHello.customer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 import springHello.common.Pageable;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
 
-	private String driverClassName;
-	private String url;
-	private String username;
-	private String password;
-
-	public void setDriverClassName(String driverClassName) {
-		this.driverClassName = driverClassName;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+	private Properties properties;
+	
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+		
+		// example
+		
+		String driverClassName = this.properties.getProperty("driverClassName");
+		String url = this.properties.getProperty("url");
+		String username = this.properties.getProperty("username");
+		String password = this.properties.getProperty("password");
 	}
 
 	@Override

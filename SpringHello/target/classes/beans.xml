@@ -11,17 +11,15 @@
 		p:customerRepository-ref="customerRepository">
 	</bean>
 	<bean id="customerRepository"
-		class="springHello.customer.CustomerRepositoryImpl"
-		p:driverClassName="com.mysql.jdbc.Driver"
-		p:url="jdbc:mysql://localhost:3306/order_system"
-		p:username="root"
-		p:password="1234">
-		
-		<!-- with property tag -->
-		<!-- <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-		<property name="url" value="jdbc:mysql://localhost:3306/order_system" />
-		<property name="username" value="root" />
-		<property name="password" value="1234" /> -->
+		class="springHello.customer.CustomerRepositoryImpl">
+		<property name="properties">
+		  <props>
+		      <prop key="driverClassName">com.mysql.jdbc.Driver</prop>
+		      <prop key="url">jdbc:mysql://localhost:3306/order_system</prop>
+		      <prop key="username">root</prop>
+		      <prop key="password">1234</prop>
+		  </props>
+		</property>
 	</bean>
 
 </beans>
