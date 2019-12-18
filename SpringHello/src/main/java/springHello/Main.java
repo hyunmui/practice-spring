@@ -30,12 +30,15 @@ public class Main {
 		
 		// autowired test
 		ApplicationContext ctx2 = new ClassPathXmlApplicationContext("autowire-bean.xml");
-		Bean1 bean1 = (Bean1)ctx2.getBean("bean1");
+		Bean1 bean1 = (Bean1)ctx2.getBean("bean11");
+		Bean1 bean12 = (Bean1)ctx2.getBean("bean12");
 		Bean2 bean2 = (Bean2)ctx2.getBean("bean2");
 		Bean3 bean3 = (Bean3)ctx2.getBean("bean3");
 		
 		System.out.println(bean1);
+		System.out.println(bean12);
 		System.out.println(bean2);
+		System.out.println(bean2.getBean1());
 		System.out.println(bean3);
 	}
 	
