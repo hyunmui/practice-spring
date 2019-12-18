@@ -2,23 +2,16 @@ package springHello.customer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
+import java.util.Map;
 
 import springHello.common.Pageable;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
 
-	private Properties properties;
+	private Map<String, String> map;
 	
-	public void setProperties(Properties properties) {
-		this.properties = properties;
-		
-		// example
-		
-		String driverClassName = this.properties.getProperty("driverClassName");
-		String url = this.properties.getProperty("url");
-		String username = this.properties.getProperty("username");
-		String password = this.properties.getProperty("password");
+	public void setMap(Map<String, String> map) {
+		this.map = map;
 	}
 
 	@Override
