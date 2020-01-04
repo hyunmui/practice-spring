@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/java,linux,macos,windows,eclipse,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=java,linux,macos,windows,eclipse,visualstudiocode
+# Created by https://www.gitignore.io/api/java,linux,macos,maven,gradle,windows,eclipse,java-web
+# Edit at https://www.gitignore.io/?templates=java,linux,macos,maven,gradle,windows,eclipse,java-web
 
 ### Eclipse ###
 .metadata
@@ -96,6 +96,10 @@ local.properties
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+### Java-Web ###
+## ignoring target file
+target/
+
 ### Linux ###
 *~
 
@@ -139,16 +143,17 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-### VisualStudioCode ###
-.vscode/*
-!.vscode/settings.json
-!.vscode/tasks.json
-!.vscode/launch.json
-!.vscode/extensions.json
-
-### VisualStudioCode Patch ###
-# Ignore all local history of files
-.history
+### Maven ###
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+.mvn/wrapper/maven-wrapper.jar
+.flattened-pom.xml
 
 ### Windows ###
 # Windows thumbnail cache files
@@ -176,4 +181,23 @@ $RECYCLE.BIN/
 # Windows shortcuts
 *.lnk
 
-# End of https://www.gitignore.io/api/java,linux,macos,windows,eclipse,visualstudiocode
+### Gradle ###
+.gradle
+build/
+
+# Ignore Gradle GUI config
+gradle-app.setting
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
+# Cache of project
+.gradletasknamecache
+
+# # Work around https://youtrack.jetbrains.com/issue/IDEA-116898
+# gradle/wrapper/gradle-wrapper.properties
+
+### Gradle Patch ###
+**/build/
+
+# End of https://www.gitignore.io/api/java,linux,macos,maven,gradle,windows,eclipse,java-web
