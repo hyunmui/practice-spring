@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import springHello.common.Pageable;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
 
-	private Map<String, String> map;
-	
-	public void setMap(Map<String, String> map) {
-		this.map = map;
-	}
+	@Value("${dataSource.driverClassName}")
+	private String drivClassName;
+	@Value("${dataSource.url}")
+	private String url;
+	@Value("${dataSource.username}")
+	private String username;
+	@Value("${dataSource.password}")
+	private String password;
 
 	@Override
 	public CustomerEntity findOne(long id) {

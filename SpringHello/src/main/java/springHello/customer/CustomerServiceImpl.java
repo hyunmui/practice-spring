@@ -3,33 +3,27 @@ package springHello.customer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.annotation.Resource;
 
 public class CustomerServiceImpl implements CustomerService {
 
+	@Resource(name = "customerRepository")
 	private CustomerRepository repository;
 
-	@Autowired
-	public void setCustomerRepository(CustomerRepository repository) {
+	public void setRepository(CustomerRepository repository) {
 		this.repository = repository;
 	}
 
-	@Value("")
-	private String drivClassName;
-	@Value("")
-	private String url;
-	@Value("")
-	private String username;
-	@Value("")
-	private String password;
-
 	@Override
 	public Customer getCustomer(long id) {
-		Customer customer = new Customer();
-		customer.setId(id);
-		customer.setName("hyunmui");
-		customer.setEmail("hyunmui@outlook.kr");
+		CustomerEntity entity = repository.findOne(id);
+		Customer customer = entity.buildDomain();
+//		Customer customer = new Customer();
+//		customer.setId(id);
+//		customer.setName("hyunmui");
+//		customer.setEmail("hyunmui@outlook.kr");
 		return customer;
 	}
 
@@ -77,10 +71,12 @@ public class CustomerServiceImpl implements CustomerService {
 		System.out.println(customer + " was deleted.");
 	}
 
+	@PostConstruct
 	public void init() {
 		System.out.println("Create instance...");
 	}
 
+	@PreDestroy
 	public void cleanUp() {
 		System.out.println("Destroy instance...");
 	}

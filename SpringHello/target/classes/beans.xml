@@ -10,11 +10,19 @@
 
 	<bean id="hello" class="springHello.Hello" />
 	<bean id="customerService"
-		class="springHello.customer.CustomerServiceImpl" scope="prototype"
-		init-method="init" destroy-method="cleanUp">
+		class="springHello.customer.CustomerServiceImpl">
 	</bean>
 	<bean id="customerRepository"
 		class="springHello.customer.CustomerRepositoryImpl">
+	</bean>
+
+	<bean id="dataSource"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:datasource.properties</value>
+			</list>
+		</property>
 	</bean>
 
 </beans>

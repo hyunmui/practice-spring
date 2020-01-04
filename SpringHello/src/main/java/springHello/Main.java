@@ -25,8 +25,8 @@ public class Main {
 		testSpringHello(ctx, beanName);
 		
 		// with annotation
-		ApplicationContext annotationCtx = new AnnotationConfigApplicationContext(AppConfig.class);
-		testSpringHello(annotationCtx, beanName);
+//		ApplicationContext annotationCtx = new AnnotationConfigApplicationContext(AppConfig.class);
+//		testSpringHello(annotationCtx, beanName);
 		
 		// autowired test
 		ApplicationContext ctx2 = new ClassPathXmlApplicationContext("autowire-bean.xml");

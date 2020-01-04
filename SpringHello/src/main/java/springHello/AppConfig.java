@@ -4,6 +4,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
+import springHello.customer.CustomerRepository;
+import springHello.customer.CustomerRepositoryImpl;
 import springHello.customer.CustomerService;
 import springHello.customer.CustomerServiceImpl;
 
@@ -16,4 +18,8 @@ public class AppConfig {
 		return new CustomerServiceImpl();
 	}
 	
+	@Bean(name = "customerRepository")
+	CustomerRepository customerRepository() {
+		return new CustomerRepositoryImpl();
+	}
 }
