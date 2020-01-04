@@ -19,7 +19,7 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
 	@Override
 	public CustomerEntity findOne(long id) {
-		// test code
+		//TODO: remove test code
 		String username = properties.getProperty("username", "");
 		System.out.println("db username: " + username);
 		
