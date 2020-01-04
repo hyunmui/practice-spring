@@ -2,22 +2,20 @@ package springHello.customer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+import java.util.Properties;
 
-import org.springframework.beans.factory.annotation.Value;
+import javax.annotation.Resource;
 
 import springHello.common.Pageable;
 
 public class CustomerRepositoryImpl implements CustomerRepository {
 
-	@Value("${dataSource.driverClassName}")
-	private String drivClassName;
-	@Value("${dataSource.url}")
-	private String url;
-	@Value("${dataSource.username}")
-	private String username;
-	@Value("${dataSource.password}")
-	private String password;
+	@Resource
+	private Properties properties;
+	
+	public void setProperties(Properties properties) {
+		this.properties = properties;
+	}
 
 	@Override
 	public CustomerEntity findOne(long id) {
