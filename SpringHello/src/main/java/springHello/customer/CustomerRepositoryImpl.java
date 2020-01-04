@@ -6,8 +6,11 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.stereotype.Repository;
+
 import springHello.common.Pageable;
 
+@Repository("customerRepository")
 public class CustomerRepositoryImpl implements CustomerRepository {
 
 	@Resource
