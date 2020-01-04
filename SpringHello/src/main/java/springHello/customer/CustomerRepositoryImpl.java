@@ -2,7 +2,7 @@ package springHello.customer;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -11,16 +11,16 @@ import springHello.common.Pageable;
 public class CustomerRepositoryImpl implements CustomerRepository {
 
 	@Resource
-	private Properties properties;
+	private Map<String, String> map;
 	
-	public void setProperties(Properties properties) {
-		this.properties = properties;
+	public void setMap(Map<String, String> map) {
+		this.map = map;
 	}
 
 	@Override
 	public CustomerEntity findOne(long id) {
 		//TODO: remove test code
-		String username = properties.getProperty("username", "");
+		String username = map.get("username");
 		System.out.println("db username: " + username);
 		
 		CustomerEntity customer = new CustomerEntity();

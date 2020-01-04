@@ -29,7 +29,7 @@ public class Main {
 //		testSpringHello(annotationCtx, beanName);
 		
 		// autowired test
-		ApplicationContext ctx2 = new ClassPathXmlApplicationContext("autowire-bean.xml");
+		ApplicationContext ctx2 = new ClassPathXmlApplicationContext("autowire_bean.xml");
 		Bean1 bean1 = (Bean1)ctx2.getBean("bean11");
 		Bean1 bean12 = (Bean1)ctx2.getBean("bean12");
 		Bean2 bean2 = (Bean2)ctx2.getBean("bean2");

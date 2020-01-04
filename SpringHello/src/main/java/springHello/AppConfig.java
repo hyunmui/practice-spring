@@ -18,8 +18,4 @@ public class AppConfig {
 		return new CustomerServiceImpl();
 	}
 	
-	@Bean(name = "customerRepository")
-	CustomerRepository customerRepository() {
-		return new CustomerRepositoryImpl();
-	}
 }
