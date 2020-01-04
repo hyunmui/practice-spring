@@ -19,6 +19,10 @@ public class CustomerRepositoryImpl implements CustomerRepository {
 
 	@Override
 	public CustomerEntity findOne(long id) {
+		// test code
+		String username = properties.getProperty("username", "");
+		System.out.println("db username: " + username);
+		
 		CustomerEntity customer = new CustomerEntity();
 		customer.setId(id);
 		customer.setName("hyunmui");

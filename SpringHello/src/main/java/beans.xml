@@ -18,11 +18,6 @@
 		class="springHello.customer.CustomerRepositoryImpl">
 	</bean>
 
-	<util:properties id="properties">
-	   <prop key="driverClassName">com.mysql.jdbc.Driver</prop>
-	   <prop key="url">jdbc:mysql://localhost:3306/order_system</prop>
-	   <prop key="username">root</prop>
-	   <prop key="password">1234</prop>
-	</util:properties>
+	<util:properties id="properties" location="classpath:props.properties" />
 
 </beans>
