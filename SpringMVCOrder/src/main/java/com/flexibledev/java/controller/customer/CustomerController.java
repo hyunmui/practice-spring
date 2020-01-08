@@ -4,17 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.flexibledev.java.domain.Customer;
 import com.flexibledev.java.model.CustomerModel;
@@ -52,9 +52,13 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "/edit.do", method = RequestMethod.POST)
-	public String add(@ModelAttribute CustomerModel customer) {
+	public String add(@Valid @ModelAttribute("customer") CustomerModel model, BindingResult bindingResult) {
+		if (bindingResult.hasErrors()) {
+			return "edit";
+		}
+		
 		try {
-			customerService.saveCustomer(customer.buildDomain());
+			customerService.saveCustomer(model.buildDomain());
 		} catch (Exception e) {
 			return "forward:/error.do";
 		}
