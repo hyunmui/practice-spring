@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.flexibledev.java.domain.Customer;
+import com.flexibledev.java.model.CustomerCondition;
 import com.flexibledev.java.model.CustomerModel;
 import com.flexibledev.java.service.CustomerService;
 
@@ -28,10 +29,11 @@ public class CustomerController {
 	private CustomerService customerService;
 
 	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
-	public void list(Model model) {
+	@ModelAttribute("customers")
+	public List<CustomerModel> list(Model model) {
 		List<Customer> customers = customerService.getCustomers();
 		List<CustomerModel> customerModels = convert(customers);
-		model.addAttribute("customers", customerModels);
+		return customerModels;
 	}
 
 	private List<CustomerModel> convert(List<Customer> customers) {
@@ -41,6 +43,17 @@ public class CustomerController {
 			customerModel.buildModel(customer);
 			customerModels.add(customerModel);
 		});
+		return customerModels;
+	}
+	
+	@RequestMapping(value = "/search.do", method = RequestMethod.GET)
+	@ModelAttribute("customers")
+	public List<CustomerModel> search(@ModelAttribute("customerCondition") CustomerCondition customerCondition) {
+		if (customerCondition.getName() == null) {
+			return null;
+		}
+		List<Customer> customers = customerService.getCustomersByName(customerCondition.getName());
+		List<CustomerModel> customerModels = convert(customers);
 		return customerModels;
 	}
 

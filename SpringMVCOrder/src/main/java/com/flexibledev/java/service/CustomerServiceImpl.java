@@ -2,6 +2,7 @@ package com.flexibledev.java.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -36,20 +37,15 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> getCustomers() {
-		List<Customer> customers = new ArrayList<Customer>();
-		for (int i = 0; i < 10; i++) {
-			Customer customer = new Customer();
-			customer.setId(i);
-			customer.setName("Name" + i);
-			customer.setAddress("Address" + i);
-			customer.setEmail("seon" + i + "@outlook.kr");
-			customers.add(customer);
-		}
-		return customers;
+		return createDummyCustomers(0, 10);
 	}
 
 	@Override
 	public List<Customer> getCustomerByPage(int index, int size) {
+		return createDummyCustomers(index, size);
+	}
+	
+	private List<Customer> createDummyCustomers(int index, int size) {
 		List<Customer> customers = new ArrayList<Customer>();
 		for (int i = index; i < index + size; i++) {
 			Customer customer = new Customer();
@@ -86,6 +82,12 @@ public class CustomerServiceImpl implements CustomerService {
 	@PreDestroy
 	public void cleanUp() {
 		System.out.println("Destroy instance...");
+	}
+
+	@Override
+	public List<Customer> getCustomersByName(String name) {
+		List<Customer> customers = createDummyCustomers(0, 10);
+		return customers.stream().filter(customer -> customer.getName().contains(name)).collect(Collectors.toList());	
 	}
 
 }
