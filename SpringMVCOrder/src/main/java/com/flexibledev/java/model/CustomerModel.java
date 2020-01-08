@@ -3,6 +3,9 @@ package com.flexibledev.java.model;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import com.flexibledev.java.domain.Customer;
 
 public class CustomerModel {
@@ -12,7 +15,8 @@ public class CustomerModel {
 	private String name;
 	@Size(max = 60, message = "주소는 60자까지 입력할 수 있습니다.")
 	private String address;
-	@Pattern(regexp = "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}", message = "정확한 이메일 주소를 입력하세요.")
+	@NotBlank(message = "이메일을 입력해주십시오.")
+	@Email(message = "정확한 이메일 주소를 입력하세요.")
 	private String email;
 
 	public long getId() {
