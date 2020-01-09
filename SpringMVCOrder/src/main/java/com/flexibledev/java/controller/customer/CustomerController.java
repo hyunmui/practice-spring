@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -28,6 +29,7 @@ import com.flexibledev.java.model.CustomerCondition;
 import com.flexibledev.java.model.CustomerModel;
 import com.flexibledev.java.service.CustomerService;
 
+@Secured("ROLE_USER")
 @Controller
 @RequestMapping(value = "/")
 public class CustomerController {
@@ -43,6 +45,7 @@ public class CustomerController {
 	@Autowired
 	private LocaleResolver localeResolver;
 
+	@Secured("ROLE_MANAGER")
 	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
 	@ModelAttribute("customers")
 	public List<CustomerModel> list(Model model) {
@@ -61,6 +64,13 @@ public class CustomerController {
 		return customerModels;
 	}
 	
+	@Secured("ROLE_MANAGER")
+	@RequestMapping(value = "/page.do", method = RequestMethod.GET)
+	public void list(Model model, int index, int size) {
+		// TODO: unimplementation
+	}
+	
+	@Secured({"ROLE_USER", "ROLE_MANAGER"})
 	@RequestMapping(value = "/search.do", method = RequestMethod.GET)
 	@ModelAttribute("customers")
 	public List<CustomerModel> search(@ModelAttribute("customerCondition") CustomerCondition customerCondition) {

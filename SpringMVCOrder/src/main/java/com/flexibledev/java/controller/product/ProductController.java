@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,13 +21,22 @@ import com.flexibledev.java.exception.ImageUploadException;
 import com.flexibledev.java.model.ProductModel;
 import com.flexibledev.java.service.ProductService;
 
+@PreAuthorize("denyAll")
 @Controller
-@RequestMapping(value = "/")
 public class ProductController {
 	
 	@Autowired
 	private ProductService productService;
 	
+	@PreAuthorize("hasRole('ROLE_MANAGER')")
+	@RequestMapping(value = "edit.do", method = RequestMethod.GET)
+	public String edit(Model model) {
+		ProductModel productModel = new ProductModel();
+		model.addAttribute("product", productModel);
+		return "edit";
+	}
+	
+	@PreAuthorize("hasRole('ROLE_MANAGER')")
 	@RequestMapping(value = "/edit.do", method = RequestMethod.POST)
 	public String add(@Valid @ModelAttribute("product") ProductModel model, 
 			BindingResult bindingResult,
@@ -60,6 +70,7 @@ public class ProductController {
 		return "result";
 	}
 	
+	@PreAuthorize("hasAnyRole('ROLE_MANAGER', 'ROLE_USER')")
 	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
 	public void list(Model model) {
 		// TODO: 

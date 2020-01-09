@@ -41,4 +41,9 @@ public class HomeController {
 		logger.info("로그인...");
 	}
 	
+	@RequestMapping(value = "/accessdenied.do", method = RequestMethod.GET)
+	public void accessdenied() {
+		logger.info("접근 거부됨...");
+	}
+	
 }

@@ -15,6 +15,6 @@
     	<spring:argument value="${ customer.email }" />
     </spring:message>
     <hr>
-    <a href="/order">홈으로</a>
+    <a href="/java">홈으로</a>
 </body>
 </html>
