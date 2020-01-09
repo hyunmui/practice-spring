@@ -16,13 +16,14 @@
             logout-success-url="/"/>
         <remember-me />
     </http>
+    
+    <jdbc-user-service id="jdbcService" data-source-ref="dataSource"
+        users-by-username-query="select username, password, enabled from users where username=?"
+        authorities-by-username-query="select username, authority from authorities where username=?"
+    />
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="user" password="password" authorities="ROLE_USER" />
-            </user-service>
-        </authentication-provider>
+        <authentication-provider user-service-ref="jdbcService" />
     </authentication-manager>
 
 </beans:beans>

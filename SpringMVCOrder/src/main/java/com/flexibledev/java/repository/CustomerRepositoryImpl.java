@@ -14,13 +14,6 @@ import com.flexibledev.java.entity.Pageable;
 @Repository("customerRepository")
 public class CustomerRepositoryImpl implements CustomerRepository {
 
-	@Resource
-	private Map<String, String> map;
-	
-	public void setMap(Map<String, String> map) {
-		this.map = map;
-	}
-
 	@Override
 	public CustomerEntity findOne(long id) {
 		CustomerEntity customer = new CustomerEntity();
