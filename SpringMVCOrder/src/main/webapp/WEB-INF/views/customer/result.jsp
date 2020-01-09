@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +9,11 @@
 </head>
 <body>
     <h1>고객 등록 정보</h1>
-    이름 : ${ customer.name } <br />
-    주소 : ${ customer.address } <br />
-    이메일 : ${ customer.email }
-    
+    <spring:message code="customer.enroll">
+    	<spring:argument value="${ customer.name }" />
+    	<spring:argument value="${ customer.address }" />
+    	<spring:argument value="${ customer.email }" />
+    </spring:message>
     <hr>
     <a href="/order">홈으로</a>
 </body>

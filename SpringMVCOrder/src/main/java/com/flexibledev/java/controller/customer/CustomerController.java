@@ -2,11 +2,17 @@ package com.flexibledev.java.controller.customer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.LocaleResolver;
 
 import com.flexibledev.java.domain.Customer;
 import com.flexibledev.java.model.CustomerCondition;
@@ -25,8 +32,16 @@ import com.flexibledev.java.service.CustomerService;
 @RequestMapping(value = "/")
 public class CustomerController {
 
+	private static final Logger logger = LoggerFactory.getLogger(CustomerController.class);
+	
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private MessageSource messageSource;
+	
+	@Autowired
+	private LocaleResolver localeResolver;
 
 	@RequestMapping(value = "/list.do", method = RequestMethod.GET)
 	@ModelAttribute("customers")
@@ -58,19 +73,29 @@ public class CustomerController {
 	}
 
 	@RequestMapping(value = "edit.do", method = RequestMethod.GET)
-	public String edit(Model model) {
+	public String edit(Model model, HttpServletRequest request, HttpServletResponse response) {
+		Locale locale = new Locale(request.getParameter("lang"));
+		localeResolver.setLocale(request, response, locale);
+		
 		CustomerModel customer = new CustomerModel();
 		model.addAttribute("customer", customer);
+		
 		return "edit";
 	}
 
 	@RequestMapping(value = "/edit.do", method = RequestMethod.POST)
-	public String add(@Valid @ModelAttribute("customer") CustomerModel model, BindingResult bindingResult) {
+	public String add(@Valid @ModelAttribute("customer") CustomerModel model, BindingResult bindingResult, Locale locale) {
 		if (bindingResult.hasErrors()) {
 			return "edit";
 		}
 		
 		try {
+			String message = messageSource.getMessage("customer.enroll",
+					new Object[] {  
+							model.getName(), model.getAddress(), model.getEmail()
+					}, locale);
+			logger.info(message);
+			
 			customerService.saveCustomer(model.buildDomain());
 		} catch (Exception e) {
 			return "forward:/error.do";
