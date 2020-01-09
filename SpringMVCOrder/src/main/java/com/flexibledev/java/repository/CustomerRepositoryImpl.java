@@ -8,8 +8,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Repository;
 
-import com.flexibledev.java.Pageable;
 import com.flexibledev.java.entity.CustomerEntity;
+import com.flexibledev.java.entity.Pageable;
 
 @Repository("customerRepository")
 public class CustomerRepositoryImpl implements CustomerRepository {
