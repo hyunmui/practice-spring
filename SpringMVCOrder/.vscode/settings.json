@@ -1,0 +1,15 @@
+{
+    "sqltools.connections": [
+        {
+            "database": "order_system",
+            "dialect": "MariaDB",
+            "isActive": true,
+            "isConnected": true,
+            "name": "order_system",
+            "password": "1q2w3e",
+            "port": 32678,
+            "server": "localhost",
+            "username": "root"
+        }
+    ]
+}

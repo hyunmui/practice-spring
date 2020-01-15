@@ -1,0 +1,16 @@
+version: "3.1"
+
+services:
+  mariadb:
+    container_name: "SpringMVCOrder"
+    image: mariadb:latest
+    restart: always
+    ports:
+      - "32678:3306"
+    volumes:
+      - ~/workspaces/practice-spring/SpringMVCOrder/docker/database/config:/etc/mysql/conf.d:ro
+      - ~/workspaces/practice-spring/SpringMVCOrder/docker/database/data:/var/lib/mysql
+      - ~/workspaces/practice-spring/SpringMVCOrder/docker/database/log:/var/log/maria
+    environment:
+      - MYSQL_ROOT_PASSWORD=1q2w3e
+      - TZ="Asia/Seoul"
