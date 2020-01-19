@@ -15,7 +15,7 @@ import org.springframework.stereotype.Repository;
 import com.flexibledev.java.entity.CustomerEntity;
 import com.flexibledev.java.entity.Pageable;
 
-@Repository("customerRepository")
+//@Repository("customerRepository")
 public class CustomerRepositoryJDBC implements CustomerRepository {
 
     @Autowired
@@ -30,20 +30,20 @@ public class CustomerRepositoryJDBC implements CustomerRepository {
     private static final String SQL_UPDATE = "update customer set name = ?, address = ?, email = ? where id = ?";
     private static final String SQL_DELETE = "delete from customer where id = ?";
     
-	@Override
-	public CustomerEntity findOne(long id) {
-		CustomerEntity customer = new CustomerEntity();
-		customer.setId(id);
-		customer.setName("hyunmui");
-		customer.setAddress("Incheon");
-		customer.setEmail("hyunmui@outlook.kr");
-		return customer;
-	}
+    @Override
+    public CustomerEntity findOne(long id) {
+        CustomerEntity customer = new CustomerEntity();
+        customer.setId(id);
+        customer.setName("hyunmui");
+        customer.setAddress("Incheon");
+        customer.setEmail("hyunmui@outlook.kr");
+        return customer;
+    }
 
-	@Override
-	public List<CustomerEntity> findAll() {
-		List<CustomerEntity> customers = new ArrayList<CustomerEntity>();
-		try {
+    @Override
+    public List<CustomerEntity> findAll() {
+        List<CustomerEntity> customers = new ArrayList<CustomerEntity>();
+        try {
             connection = dataSource.getConnection();
             stmt = connection.prepareStatement(SQL_GETALL);
             rs = stmt.executeQuery();
@@ -76,28 +76,28 @@ public class CustomerRepositoryJDBC implements CustomerRepository {
                 System.out.println(e);
             }
         }
-		return null;
-	}
+        return null;
+    }
 
-	@Override
-	public List<CustomerEntity> findAll(Pageable page) {
-		List<CustomerEntity> customers = new ArrayList<CustomerEntity>();
-		int index = page.getIndex();
-		int size = page.getSize();
-		for (int i = 0; i < 10; i++) {
-			CustomerEntity customer = new CustomerEntity();
-			customer.setId(i);
-			customer.setName("Name" + i);
-			customer.setAddress("Address" + i);
-			customer.setEmail("seon" + i + "@outlook.kr");
-			customers.add(customer);
-		}
-		return customers;
-	}
+    @Override
+    public List<CustomerEntity> findAll(Pageable page) {
+        List<CustomerEntity> customers = new ArrayList<CustomerEntity>();
+        int index = page.getIndex();
+        int size = page.getSize();
+        for (int i = 0; i < 10; i++) {
+            CustomerEntity customer = new CustomerEntity();
+            customer.setId(i);
+            customer.setName("Name" + i);
+            customer.setAddress("Address" + i);
+            customer.setEmail("seon" + i + "@outlook.kr");
+            customers.add(customer);
+        }
+        return customers;
+    }
 
-	@Override
-	public void save(CustomerEntity customer) {
-		try {
+    @Override
+    public void save(CustomerEntity customer) {
+        try {
             connection = dataSource.getConnection();
             stmt = connection.prepareStatement(SQL_INSERT);
             stmt.setString(1, customer.getName());
@@ -121,8 +121,8 @@ public class CustomerRepositoryJDBC implements CustomerRepository {
                 System.out.println(e);
             }
         }
-	}
-	
+    }
+    
     @Override
     public void update(CustomerEntity customer) {
         try {
@@ -152,9 +152,9 @@ public class CustomerRepositoryJDBC implements CustomerRepository {
         }
     }
 
-	@Override
-	public void delete(long id) {
-	    try {
+    @Override
+    public void delete(long id) {
+        try {
             connection = dataSource.getConnection();
             stmt = connection.prepareStatement(SQL_DELETE);
             stmt.setLong(1, id);
@@ -176,7 +176,7 @@ public class CustomerRepositoryJDBC implements CustomerRepository {
                 System.out.println(e);
             }
         }
-	}
+    }
 
     @Override
     public CustomerEntity findOneByName(String name) {
