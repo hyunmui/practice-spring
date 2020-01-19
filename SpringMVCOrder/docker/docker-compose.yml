@@ -14,3 +14,11 @@ services:
     environment:
       - MYSQL_ROOT_PASSWORD=1q2w3e
       - TZ="Asia/Seoul"
+  # tomcat:
+  #   container_name: "tomcat_order_system"
+  #   image: tomcat:latest
+  #   restart: always
+  #   ports: 
+  #     - "8980:8080"
+  #   volumes:
+  #     - ~/workspaces/practice-spring/SpringMVCOrder/docker/tomcat:/usr/local/tomcat

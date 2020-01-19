@@ -37,7 +37,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public List<Customer> getCustomers() {
-		return createDummyCustomers(0, 10);
+		return repository.findAll().stream().map(entity -> entity.buildDomain()).collect(Collectors.toList());
 	}
 
 	@Override
@@ -60,7 +60,9 @@ public class CustomerServiceImpl implements CustomerService {
 
 	@Override
 	public void saveCustomer(Customer customer) {
-		System.out.println(customer + " was saved.");
+	    CustomerEntity entity = new CustomerEntity();
+	    entity.buildEntity(customer);
+		repository.save(entity);
 	}
 
 	@Override

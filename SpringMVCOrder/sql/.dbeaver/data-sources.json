@@ -1,0 +1,30 @@
+{
+	"folders": {},
+	"connections": {
+		"mariaDB-16fb97eb0d8-24ba25bdbe5d58de": {
+			"provider": "mysql",
+			"driver": "mariaDB",
+			"name": "MariaDB - order_system",
+			"save-password": true,
+			"read-only": false,
+			"configuration": {
+				"host": "localhost",
+				"port": "32678",
+				"database": "order_system",
+				"url": "jdbc:mysql://localhost:32678/order_system",
+				"type": "dev",
+				"handlers": {}
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false
+		}
+	}
+}
