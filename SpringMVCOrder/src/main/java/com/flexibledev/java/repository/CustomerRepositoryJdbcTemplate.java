@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.flexibledev.java.entity.CustomerEntity;
 import com.flexibledev.java.entity.Pageable;
 
-@Repository("customerRepository")
+//@Repository("customerRepository")
 public class CustomerRepositoryJdbcTemplate implements CustomerRepository {
 
     @Autowired
@@ -71,7 +71,7 @@ public class CustomerRepositoryJdbcTemplate implements CustomerRepository {
                 entity.setName(rs.getString("name"));
                 entity.setAddress(rs.getString("address"));
                 entity.setEmail(rs.getString("email"));
-                return null;
+                return entity;
             }
 
         });
