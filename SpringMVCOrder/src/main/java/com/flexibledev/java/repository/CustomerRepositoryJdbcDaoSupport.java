@@ -1,7 +1,5 @@
 package com.flexibledev.java.repository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,12 +7,13 @@ import java.util.Map;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcDaoSupport;
+import org.springframework.stereotype.Repository;
 
 import com.flexibledev.java.entity.CustomerEntity;
 import com.flexibledev.java.entity.Pageable;
 
+//@Repository("customerRepository")
 public class CustomerRepositoryJdbcDaoSupport extends NamedParameterJdbcDaoSupport implements CustomerRepository {
 
     private static final String SQL_GETALL = "select * from customer";
