@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,10 +21,8 @@ public class ProductRepositoryHibernate implements ProductRepository {
 	public ProductEntity findOne(long id) {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
-		String sql = "SELECT * FROM product WHERE product_id = :id";
-		ProductEntity product = (ProductEntity)session.createSQLQuery(sql)
-				.addEntity(ProductEntity.class)
-				.setParameter("id", id)
+		ProductEntity product = (ProductEntity)session.createCriteria(ProductEntity.class)
+				.add(Restrictions.eq("id", id))
 				.uniqueResult();
 		session.getTransaction().commit();
 		return product;
@@ -33,8 +32,7 @@ public class ProductRepositoryHibernate implements ProductRepository {
 	public List<ProductEntity> findAll() {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
-		String sql = "SELECT * FROM PRODUCT";
-		List<ProductEntity> products = session.createSQLQuery(sql).addEntity(ProductEntity.class).list();
+		List<ProductEntity> products = session.createCriteria(ProductEntity.class).list();
 		session.getTransaction().commit();
 		return products;
 	}
@@ -48,16 +46,7 @@ public class ProductRepositoryHibernate implements ProductRepository {
 	public void save(ProductEntity product) {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
-		String sql = "INSERT INTO product (name, price, description) VALUES (:name, :price, :description)";
-		session.createSQLQuery(sql)
-			.setParameter("name", product.getName())
-			.setParameter("price", product.getPrice())
-			.setParameter("description", product.getDescription())
-			.executeUpdate();
-		
-		String mysql = "SELECT LAST_INSERT_ID()";
-		long id = (long)session.createSQLQuery(mysql).uniqueResult();
-		product.setId(id);
+		session.save(product);
 		session.getTransaction().commit();
 	}
 
@@ -65,13 +54,7 @@ public class ProductRepositoryHibernate implements ProductRepository {
 	public void update(ProductEntity product) {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
-		String sql = "UPDATE product SET name = :name, price = :price, description = :description WHERE product_id = :id";
-		session.createSQLQuery(sql)
-			.setParameter("name", product.getName())
-			.setParameter("price", product.getPrice())
-			.setParameter("description", product.getDescription())
-			.setParameter("id", product.getId())
-			.executeUpdate();
+		session.update(product);;
 		session.getTransaction().commit();
 	}
 	
@@ -79,10 +62,7 @@ public class ProductRepositoryHibernate implements ProductRepository {
 	public void delete(long id) {
 		Session session = sessionFactory.getCurrentSession();
 		session.beginTransaction();
-		String sql = "DELETE FROM product WHERE product_id = :id";
-		session.createSQLQuery(sql)
-			.setParameter("id", id)
-			.executeUpdate();
+		session.delete(findOne(id));
 		session.getTransaction().commit();
 	}
 
