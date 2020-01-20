@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.TransactionStatus;
+import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import org.springframework.transaction.support.TransactionCallback;
 import org.springframework.transaction.support.TransactionTemplate;
 
@@ -73,7 +74,7 @@ public class CustomerServiceTxTemplate implements CustomerService {
                     }
                 } catch (Exception e) {
                     logger.info("삭제를 취소하고 롤백합니다!!");
-                    status.setRollbackOnly();
+                    TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
                 }
                 return null;
             }

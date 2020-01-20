@@ -42,6 +42,8 @@
       <tx:method name="find*" propagation="SUPPORTS" read-only="true" />
     </tx:attributes>
   </tx:advice>
+  
+  <tx:annotation-driven transaction-manager="txManager" />
 
   <aop:config>
     <aop:pointcut id="txPointcut"
