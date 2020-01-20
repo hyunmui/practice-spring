@@ -14,7 +14,7 @@ import com.flexibledev.java.domain.Customer;
 import com.flexibledev.java.entity.CustomerEntity;
 import com.flexibledev.java.repository.CustomerRepository;
 
-@Service("customerService")
+//@Service("customerService")
 public class CustomerServiceImpl implements CustomerService {
 
 	@Resource(name = "customerRepository")
