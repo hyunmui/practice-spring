@@ -1,8 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="com.flexibledev.java.entity">
-    <class name="CustomerEntity" table="CUSTOMER">
+<!-- Generated 2020. 1. 20. ???? 11:59:02 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.flexibledev.java.entity.CustomerEntity" table="CUSTOMER">
         <id name="id" type="long">
             <column name="CUSTOMER_ID" />
             <generator class="native" />

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2020. 1. 20. ???? 11:59:02 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="com.flexibledev.java.entity.OrderEntity" table="ORDERS">
+        <id name="id" type="long">
+            <column name="ORDER_ID" />
+            <generator class="assigned" />
+        </id>
+        <property name="orderDate" type="java.util.Date">
+            <column name="ORDERDATE" />
+        </property>
+        <list name="items" inverse="false" table="ORDER_ITEM" lazy="true">
+            <key>
+                <column name="ITEM_ID" />
+            </key>
+            <list-index></list-index>
+            <one-to-many class="com.flexibledev.java.entity.OrderItemEntity" />
+        </list>
+    </class>
+</hibernate-mapping>
