@@ -1,10 +1,18 @@
 package com.flexibledev.java.entity;
 
+import javax.persistence.*;
+
 import com.flexibledev.java.domain.OrderItem;
 
+@Entity
+@Table(name = "order_item")
 public class OrderItemEntity {
+    @Column(name = "order_item_id")
 	private long id;
+    @Column(name = "amount")
 	private int amount;
+    @ManyToOne
+    @JoinColumn(name = "product_id")
 	private ProductEntity product;
 
 	public long getId() {

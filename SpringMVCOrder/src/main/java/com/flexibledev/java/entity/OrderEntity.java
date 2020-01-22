@@ -6,14 +6,27 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import javax.persistence.*;
+
 import com.flexibledev.java.domain.Order;
 import com.flexibledev.java.domain.OrderItem;
 
+@Entity
+@Table(name = "orders")
 public class OrderEntity {
+    @Id
+    @Column(name = "order_id")
 	private long id;
+    @Column(name = "order_date")
 	private Date orderDate;
-	private CustomerEntity customer;
+	@OneToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+	@JoinColumn(name = "order_id")
+	@OrderBy("id asc")
+	@OrderColumn(name = "idx")
 	private Set<OrderItemEntity> items;
+	@JoinColumn(name = "customer_id")
+	@ManyToOne(cascade = { CascadeType.ALL })
+	private CustomerEntity customer;
 
 	public long getId() {
 		return id;
