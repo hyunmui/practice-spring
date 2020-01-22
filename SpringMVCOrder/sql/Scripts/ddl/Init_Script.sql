@@ -40,3 +40,14 @@ ADD FOREIGN KEY R_6 (order_id) REFERENCES orders (order_id);
 
 alter table orders 
 ADD FOREIGN KEY R_7 (customer_id) REFERENCES customer (customer_id);
+
+
+-- 16.4 add delivery table
+CREATE TABLE delivery (
+	order_id INT PRIMARY KEY AUTO_INCREMENT,
+	receiver VARCHAR(50),
+	address VARCHAR(100)
+);
+
+alter table delivery
+ADD FOREIGN KEY R_8 (order_id) REFERENCES orders (order_id);

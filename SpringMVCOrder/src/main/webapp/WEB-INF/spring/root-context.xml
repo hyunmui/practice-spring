@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns:context="http://www.springframework.org/schema/context"
-  xmlns:aop="http://www.springframework.org/schema/aop"
-  xmlns:util="http://www.springframework.org/schema/util"
-  xmlns:tx="http://www.springframework.org/schema/tx"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context" xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:util="http://www.springframework.org/schema/util" xmlns:tx="http://www.springframework.org/schema/tx"
   xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
 		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
@@ -28,8 +25,7 @@
     <property name="sessionFactory" ref="sessionFactory" />
   </bean>
 
-  <bean id="transactionTemplate"
-    class="org.springframework.transaction.support.TransactionTemplate">
+  <bean id="transactionTemplate" class="org.springframework.transaction.support.TransactionTemplate">
     <property name="transactionManager" ref="txManager" />
   </bean>
 
@@ -42,7 +38,7 @@
       <tx:method name="find*" propagation="SUPPORTS" read-only="true" />
     </tx:attributes>
   </tx:advice>
-  
+
   <tx:annotation-driven transaction-manager="txManager" />
 
   <aop:config>
@@ -50,16 +46,15 @@
       expression="execution(* com.flexibledev.java.service.*.*(..)) || execution(* com.flexibledev.java.repository.*.*(..))" />
     <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice" />
   </aop:config>
-  
+
   <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
     <property name="dataSource" ref="dataSource" />
     <property name="configLocation">
-        <value>classpath:hibernate.cfg.xml</value>
+      <value>classpath:hibernate.cfg.xml</value>
     </property>
   </bean>
 
-  <bean id="messageSource"
-    class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+  <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
     <property name="cacheSeconds" value="-1" />
     <property name="defaultEncoding" value="UTF-8" />
     <property name="basenames">
@@ -72,14 +67,13 @@
   </bean>
 
   <!-- Get environment properties -->
-  <!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> <property 
-    name="location" value="classpath:environment.properties" /> </bean> -->
+  <!-- <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"> <property name="location" value="classpath:environment.properties" 
+    /> </bean> -->
   <!-- or -->
   <context:property-placeholder file-encoding="UTF-8"
     location="classpath:environment.properties" />
 
-  <bean id="validator"
-    class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+  <bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
     <property name="validationMessageSource" ref="messageSource" />
   </bean>
 

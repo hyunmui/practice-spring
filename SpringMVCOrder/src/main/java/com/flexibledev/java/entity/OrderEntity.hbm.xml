@@ -1,22 +1,24 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2020. 1. 20. ???? 11:59:02 by Hibernate Tools 3.5.0.Final -->
-<hibernate-mapping>
-    <class name="com.flexibledev.java.entity.OrderEntity" table="ORDERS">
+<hibernate-mapping package="com.flexibledev.java.entity">
+    <class name="OrderEntity" table="orders">
         <id name="id" type="long">
-            <column name="ORDER_ID" />
-            <generator class="assigned" />
+            <column name="order_id" />
+            <generator class="native" />
         </id>
         <property name="orderDate" type="java.util.Date">
-            <column name="ORDERDATE" />
+            <column name="order_date" />
         </property>
-        <list name="items" inverse="false" table="ORDER_ITEM" lazy="true">
+        <many-to-one name="customer" class="CustomerEntity" fetch="join" cascade="save-update">
+            <column name="customer_id" />
+        </many-to-one>
+        <set name="items" table="order_item" inverse="false" lazy="true" 
+            cascade="save-update, delete" order-by="order_item_id asc">
             <key>
-                <column name="ITEM_ID" />
+                <column name="order_id" />
             </key>
-            <list-index></list-index>
-            <one-to-many class="com.flexibledev.java.entity.OrderItemEntity" />
-        </list>
+            <one-to-many class="OrderItemEntity" />
+        </set>
     </class>
 </hibernate-mapping>

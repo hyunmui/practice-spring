@@ -1,6 +1,7 @@
 package com.flexibledev.java.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -84,8 +85,7 @@ public class CustomerServiceTxTemplate implements CustomerService {
 
     @Override
     public List<Customer> getCustomersByName(String name) {
-        // TODO Auto-generated method stub
-        return null;
+        return repository.findByName(name).stream().map(entity -> entity.buildDomain()).collect(Collectors.toList());
     }
 
 }

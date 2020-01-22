@@ -1,10 +1,5 @@
 package com.flexibledev.java.entity;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import com.flexibledev.java.domain.Order;
 import com.flexibledev.java.domain.OrderItem;
 
 public class OrderItemEntity {
@@ -35,7 +30,7 @@ public class OrderItemEntity {
 	public void setProduct(ProductEntity product) {
 		this.product = product;
 	}
-
+	
 	public String toString() {
 		return "id : " + id + ", amount : " + amount + ", product : " + product;
 	}

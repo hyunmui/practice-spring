@@ -2,7 +2,9 @@ package com.flexibledev.java.entity;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.flexibledev.java.domain.Order;
 import com.flexibledev.java.domain.OrderItem;
@@ -10,7 +12,8 @@ import com.flexibledev.java.domain.OrderItem;
 public class OrderEntity {
 	private long id;
 	private Date orderDate;
-	private List<OrderItemEntity> items;
+	private CustomerEntity customer;
+	private Set<OrderItemEntity> items;
 
 	public long getId() {
 		return id;
@@ -28,11 +31,19 @@ public class OrderEntity {
 		this.orderDate = orderDate;
 	}
 
-	public List<OrderItemEntity> getItems() {
+	public CustomerEntity getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(CustomerEntity customer) {
+		this.customer = customer;
+	}
+
+	public Set<OrderItemEntity> getItems() {
 		return items;
 	}
 
-	public void setItems(List<OrderItemEntity> items) {
+	public void setItems(Set<OrderItemEntity> items) {
 		this.items = items;
 	}
 
@@ -47,6 +58,7 @@ public class OrderEntity {
 		Order order = new Order();
 		order.setId(id);
 		order.setOrderDate(orderDate);
+		order.setCustomer(customer.buildDomain());
 		List<OrderItem> orderItems = new ArrayList<OrderItem>();
 		for (OrderItemEntity item : items)
 			orderItems.add(item.buildDomain());
@@ -57,7 +69,9 @@ public class OrderEntity {
 	public void buildEntity(Order order) {
 		id = order.getId();
 		orderDate = order.getOrderDate();
-		items = new ArrayList<OrderItemEntity>();
+		customer = new CustomerEntity();
+		customer.buildEntity(order.getCustomer());
+		items = new HashSet<OrderItemEntity>();
 		for (OrderItem orderItem : order.getItems()) {
 			OrderItemEntity item = new OrderItemEntity();
 			item.buildEntity(orderItem);

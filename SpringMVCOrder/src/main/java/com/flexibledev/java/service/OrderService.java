@@ -1,10 +1,16 @@
 package com.flexibledev.java.service;
 
+import java.util.List;
+
+import com.flexibledev.java.domain.Customer;
 import com.flexibledev.java.domain.Order;
 
 public interface OrderService {
 
-	public void saveOrder(Order order);
-	public void purchaseOrder(Order order);
-
+	void purchaseOrder(Order order);
+	List<Order> getOrders(Customer customer);
+	Order getOrder(long id);
+	
+	void testOneAndOne();
+	void testOneAndMany();
 }

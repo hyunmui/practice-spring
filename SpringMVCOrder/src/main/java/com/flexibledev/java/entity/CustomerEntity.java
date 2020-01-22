@@ -1,5 +1,7 @@
 package com.flexibledev.java.entity;
 
+import java.util.Set;
+
 import com.flexibledev.java.domain.Customer;
 
 public class CustomerEntity {
@@ -7,6 +9,7 @@ public class CustomerEntity {
 	private String name;
 	private String address;
 	private String email;
+	private Set<OrderEntity> orders;
 
 	public long getId() {
 		return id;
@@ -39,12 +42,12 @@ public class CustomerEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("id: %s / name: %s / address: %s / email: %s", id, name, address, email);
 	}
-	
+
 	public Customer buildDomain() {
 		Customer customer = new Customer();
 		customer.setId(id);
@@ -53,7 +56,7 @@ public class CustomerEntity {
 		customer.setEmail(email);
 		return customer;
 	}
-	
+
 	public void buildEntity(Customer customer) {
 		id = customer.getId();
 		name = customer.getName();

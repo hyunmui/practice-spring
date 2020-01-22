@@ -41,4 +41,5 @@ public class Order implements Serializable {
 	public void setItems(List<OrderItem> items) {
 		this.items = items;
 	}
+
 }

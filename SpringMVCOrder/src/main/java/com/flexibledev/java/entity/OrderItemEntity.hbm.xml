@@ -1,18 +1,17 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<!-- Generated 2020. 1. 20. ???? 11:59:02 by Hibernate Tools 3.5.0.Final -->
-<hibernate-mapping>
-    <class name="com.flexibledev.java.entity.OrderItemEntity" table="ORDER_ITEM">
+<hibernate-mapping package="com.flexibledev.java.entity">
+    <class name="OrderItemEntity" table="order_item">
         <id name="id" type="long">
-            <column name="ORDER_ITEM_ID" />
+            <column name="order_item_id" />
             <generator class="native" />
         </id>
         <property name="amount" type="int">
-            <column name="AMOUNT" />
+            <column name="amount" />
         </property>
-        <many-to-one name="product" class="com.flexibledev.java.entity.ProductEntity" fetch="join" unique="true">
-            <column name="PRODUCT_ID" />
+        <many-to-one name="product" class="ProductEntity" fetch="join">
+            <column name="product_id" />
         </many-to-one>
     </class>
 </hibernate-mapping>

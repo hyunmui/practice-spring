@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-<hibernate-mapping>
-    <class name="com.flexibledev.java.entity.ProductEntity" table="PRODUCT">
+<hibernate-mapping package="com.flexibledev.java.entity">
+    <class name="ProductEntity" table="product">
         <id name="id" type="long">
-            <column name="PRODUCT_ID" />
+            <column name="product_id" />
             <generator class="native" />
         </id>
         <property name="name" type="java.lang.String">
-            <column name="NAME" />
+            <column name="name" />
         </property>
         <property name="price" type="int">
-            <column name="PRICE" />
+            <column name="price" />
         </property>
         <property name="description" type="java.lang.String">
-            <column name="DESCRIPTION" />
+            <column name="description" />
         </property>
     </class>
 </hibernate-mapping>

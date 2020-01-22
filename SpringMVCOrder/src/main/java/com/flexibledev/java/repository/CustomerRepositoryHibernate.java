@@ -50,8 +50,12 @@ public class CustomerRepositoryHibernate implements CustomerRepository {
 
 	@Override
 	public List<CustomerEntity> findAll(Pageable page) {
-		// TODO Auto-generated method stub
-		return null;
+		Session session = sessionFactory.getCurrentSession();
+		session.beginTransaction();
+		String hql = "from CustomerEntity";
+		List<CustomerEntity> customers = session.createQuery(hql).setFirstResult(page.getIndex()).setMaxResults(page.getSize()).list();
+		session.getTransaction().commit();
+		return customers;
 	}
 
 	@Override
