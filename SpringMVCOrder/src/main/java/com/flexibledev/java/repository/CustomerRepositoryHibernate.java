@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import com.flexibledev.java.entity.CustomerEntity;
 import com.flexibledev.java.entity.Pageable;
 
-@Repository("customerRepository")
+//@Repository("customerRepository")
 public class CustomerRepositoryHibernate implements CustomerRepository {
 
 	@Autowired
